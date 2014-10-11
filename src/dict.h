@@ -75,8 +75,11 @@ typedef struct dictht {
 
 typedef struct dict {
     dictType *type;
+    /*用于给dictType中的函数传递可选参数*/
     void *privdata;
+    /*一般情况下字典只使用ht[0], ht[1]仅在对ht[0]哈希表进行rehash时使用*/
     dictht ht[2];
+    /*记录rehash的进度*/
     long rehashidx; /* rehashing not in progress if rehashidx == -1 */
     int iterators; /* number of iterators currently running */
 } dict;
